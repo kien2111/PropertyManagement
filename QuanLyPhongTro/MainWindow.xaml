@@ -1,0 +1,127 @@
+﻿<Window x:Class="QuanLyPhongTro.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyPhongTro"      
+        xmlns:vm="clr-namespace:QuanLyPhongTro.ViewModel"
+        xmlns:pages="clr-namespace:QuanLyPhongTro.Pages"
+        xmlns:commands="clr-namespace:QuanLyPhongTro.Commands"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{StaticResource MaterialDesignFont}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        mc:Ignorable="d"
+        DataContext="{Binding Main, Source={StaticResource Locator}}"
+        Title="MainWindow" Height="600" Width="1080">
+    <Window.Resources>
+        <Storyboard x:Key="MenuOpen">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="60"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="200"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="MenuClose">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="200"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="60"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <DataTemplate DataType="{x:Type vm:HouseCollectionViewModel}">
+            <pages:HouseCollection/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
+            <pages:Dashboard/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:HouseDetailViewModel}">
+            <pages:HouseDetail/>
+        </DataTemplate>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenMenu">
+            <BeginStoryboard Storyboard="{StaticResource MenuOpen}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonCloseMenu">
+            <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    <DockPanel>
+        <Grid x:Name="GridMenu" Width="60" DockPanel.Dock="Left" HorizontalAlignment="Left" Background="#ffab00">
+            <StackPanel>
+                <Grid Height="150">
+                    <Button x:Name="ButtonCloseMenu" Width="60" VerticalAlignment="Top" HorizontalAlignment="Right" Height="60" Background="{x:Null}" BorderBrush="{x:Null}" Click="ButtonCloseMenu_Click" Visibility="Collapsed">
+                        <materialDesign:PackIcon Foreground="Black" Kind="ArrowLeft" Width="25" Height="25" />
+                    </Button>
+                    <Button x:Name="ButtonOpenMenu" Width="60" Height="60" Background="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Right" BorderBrush="{x:Null}" Click="ButtonOpenMenu_Click">
+                        <materialDesign:PackIcon Foreground="Black" Kind="Menu"  Width="25" Height="25"/>
+                    </Button>
+                </Grid>
+                <ListView x:Name="ListControl" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="Black" Background="{x:Null}" BorderThickness="0">
+                    <ListViewItem Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Margin="12" Kind="ViewDashboard" Width="25" Height="25" VerticalAlignment="Center"/>
+                            <TextBlock Text="Bảng điều khiển" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Margin="12" Kind="HomeVariant" Width="25" Height="25" VerticalAlignment="Center"/>
+                            <TextBlock Text="Phòng trọ" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Margin="12" Kind="WaterPump" Width="25" Height="25" VerticalAlignment="Center"/>
+                            <TextBlock Text="Điện nước" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Margin="12" Kind="FileDocument" Width="25" Height="25" VerticalAlignment="Center"/>
+                            <TextBlock Text="Hợp đồng" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Margin="12" Kind="Bell" Width="25" Height="25" VerticalAlignment="Center"/>
+                            <TextBlock Text="Thông báo" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Margin="12" Kind="Finance" Width="25" Height="25" VerticalAlignment="Center"/>
+                            <TextBlock Text="Thống kê" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Margin="12" Kind="Account" Width="25" Height="25" VerticalAlignment="Center"/>
+                            <TextBlock Text="Hóa đơn" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewControl_Click" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </StackPanel>
+        </Grid>
+        <Grid Height="60" DockPanel.Dock="Top" VerticalAlignment="Top" Background="#FF1F4457" >
+            <StackPanel Orientation="Horizontal">
+                <Button Width="80">Dashboard</Button>
+                <Button Width="160">HouseCollection</Button>
+            </StackPanel>
+        </Grid>
+        
+        <Grid HorizontalAlignment="Stretch" DockPanel.Dock="Left" Margin="0 0 0 0">
+            <!--Frame x:Name="_mainFrame" NavigationUIVisibility="Hidden"></-->
+            <materialDesign:Transitioner SelectedIndex="{Binding ActiveFrameIndex}" 
+                                         ItemsSource="{Binding AvailableFrameCollection}"/>
+        </Grid>
+    </DockPanel>
+</Window>

@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="QuanLyPhongTro.ReuseControl.HouseCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:viewModel="clr-namespace:QuanLyPhongTro.ViewModel"            
+             xmlns:local="clr-namespace:QuanLyPhongTro.ReuseControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="200">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Card.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.CheckBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Flipper.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Popupbox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <WrapPanel>
+        <materialDesign:Card Width="200" Height="300">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="140" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Image Grid.Row="1" Height="140" Width="200" Stretch="UniformToFill">
+                    <Image.Source>
+                        <BitmapImage UriSource="../Resources/img_defaulthouse.jpg"/>
+                    </Image.Source>
+                </Image>
+                <TextBlock x:Name="TxtRoomNo" Grid.Row="0" VerticalAlignment="Center" Margin="10" FontWeight="Bold" Text="{Binding Name}"></TextBlock>
+                <Button Grid.Row="1" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
+                        HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                        Margin="0 0 0 -20">
+                    <materialDesign:PackIcon Kind="Bike" />
+                </Button>
+                <StackPanel Grid.Row="2" Margin="8 28 8 0" >
+                    <TextBlock FontWeight="Medium">Diện tích : <Run Foreground="Gray" x:Name="TxtSquare" ></Run></TextBlock>
+                    <TextBlock FontWeight="Medium">Tình trạng : <Run Foreground="Red" x:Name="TxtStatus"></Run></TextBlock>
+                    <TextBlock FontWeight="Medium">Loại phòng : <Run Foreground="DarkBlue" x:Name="TxtCategoryHouse">Có lửng</Run></TextBlock>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Right" Grid.Row="3" Orientation="Horizontal" Margin="8">
+                    <Button Style="{StaticResource MaterialDesignToolButton}" Width="30" Padding="2 0 2 0"
+                            materialDesign:RippleAssist.IsCentered="True">
+                        <materialDesign:PackIcon Kind="ShareVariant" />
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignToolButton}" Width="30" Padding="2 0 2 0"
+                            materialDesign:RippleAssist.IsCentered="True">
+                        <materialDesign:PackIcon Kind="Heart" />
+                    </Button>
+                    <materialDesign:PopupBox Style="{StaticResource MaterialDesignToolPopupBox}" Padding="2 0 2 0">
+                        <StackPanel>
+                            <Button Content="More"/>
+                            <Button Content="Options"/>
+                        </StackPanel>
+                    </materialDesign:PopupBox>
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+    </WrapPanel>
+</UserControl>
